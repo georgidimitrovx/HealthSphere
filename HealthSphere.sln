@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthSphere.Server", "HealthSphere.Server\HealthSphere.Server.csproj", "{58A287E7-350D-44AE-9BE3-6685E05D389F}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "healthsphere.client", "healthsphere.client\healthsphere.client.esproj", "{72D85C1E-F577-44C3-8FFF-7D141F182FD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58A287E7-350D-44AE-9BE3-6685E05D389F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A287E7-350D-44AE-9BE3-6685E05D389F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A287E7-350D-44AE-9BE3-6685E05D389F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A287E7-350D-44AE-9BE3-6685E05D389F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D85C1E-F577-44C3-8FFF-7D141F182FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D85C1E-F577-44C3-8FFF-7D141F182FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D85C1E-F577-44C3-8FFF-7D141F182FD4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{72D85C1E-F577-44C3-8FFF-7D141F182FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D85C1E-F577-44C3-8FFF-7D141F182FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D85C1E-F577-44C3-8FFF-7D141F182FD4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAAC7118-EB29-4024-852C-C54BF65F2646}
+	EndGlobalSection
+EndGlobal
