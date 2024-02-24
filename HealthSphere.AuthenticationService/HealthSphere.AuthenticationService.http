@@ -1,0 +1,6 @@
+@HealthSphere.AuthenticationService_HostAddress = http://localhost:5070
+
+GET {{HealthSphere.AuthenticationService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

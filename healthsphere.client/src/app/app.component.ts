@@ -1,11 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+enum AccountTypes {
+  Patient,
+  Doctor,
+  Staff,
+}
+
+interface UserCredentialsDto {
+  username: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  accountType: AccountTypes;
 }
 
 @Component({
@@ -14,23 +22,33 @@ interface WeatherForecast {
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getForecasts();
+    this.signIn();
   }
 
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
+  signIn() {
+    var signInUrl = 'https://localhost:7203/api/Gateway/signIn';
+    var userCredentialsDto: UserCredentialsDto = {
+      username: 'georgidimitrovx',
+      email: 'georgidimitrovx@gmail.com',
+      password: 'qwerty',
+      firstName: 'Georgi',
+      lastName: 'Dimitrov',
+      accountType: AccountTypes.Staff
+    }
+
+    this.http.post<any>(signInUrl, userCredentialsDto).subscribe({
+      next: (response) => {
+        console.log('Sign in successful', response);
+        // Handle successful sign in
       },
-      (error) => {
-        console.error(error);
+      error: (error) => {
+        console.error('Sign in failed', error);
+        // Handle sign in error
       }
-    );
+    });
   }
 
   title = 'healthsphere.client';

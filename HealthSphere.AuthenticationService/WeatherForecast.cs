@@ -1,4 +1,4 @@
-namespace HealthSphere.Server
+namespace HealthSphere.AuthenticationService
 {
     public class WeatherForecast
     {

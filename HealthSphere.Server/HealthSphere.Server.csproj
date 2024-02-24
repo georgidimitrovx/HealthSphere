@@ -20,6 +20,7 @@
     <ProjectReference Include="..\healthsphere.client\healthsphere.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\HealthSphere.SharedKernel\HealthSphere.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>
