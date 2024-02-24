@@ -2,27 +2,40 @@
 {
     public static class Helpers
     {
-        public enum Services
+        public enum ServiceTypes
         {
+            Unidentified = -1,
             Authentication,
         }
 
-        public static string GetServiceEndpoint(Services service, bool isFullPath = false)
+        public static ServiceTypes GetServiceFromUrl(string url)
+        {
+            switch(url)
+            {
+                case "signIn":
+                case "signUp":
+                    return ServiceTypes.Authentication;
+            }
+
+            return ServiceTypes.Unidentified;
+        }
+
+        public static string GetServiceEndpoint(ServiceTypes serviceType, bool isFullPath = false)
         {
             string result = "";
 
-            switch (service)
+            switch (serviceType)
             {
-                case Services.Authentication:
-                    result += "https://localhost:7231";
+                case ServiceTypes.Authentication:
+                    result += "https://localhost:7271";
                     break;
             }
 
             if (isFullPath)
             {
-                switch (service)
+                switch (serviceType)
                 {
-                    case Services.Authentication:
+                    case ServiceTypes.Authentication:
                         result += "/api/Authentication/";
                         break;
                 }

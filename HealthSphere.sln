@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSphere.Server", "Heal
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "healthsphere.client", "healthsphere.client\healthsphere.client.esproj", "{72D85C1E-F577-44C3-8FFF-7D141F182FD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthSphere.AuthenticationService", "HealthSphere.AuthenticationService\HealthSphere.AuthenticationService.csproj", "{30547383-14BD-420C-A7D3-6C99B2C2ECB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSphere.AuthenticationService", "HealthSphere.AuthenticationService\HealthSphere.AuthenticationService.csproj", "{30547383-14BD-420C-A7D3-6C99B2C2ECB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthSphere.SharedKernel", "HealthSphere.SharedKernel\HealthSphere.SharedKernel.csproj", "{6B02B9DB-2A9E-41F8-B7E6-8FDD58B8021C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSphere.SharedKernel", "HealthSphere.SharedKernel\HealthSphere.SharedKernel.csproj", "{6B02B9DB-2A9E-41F8-B7E6-8FDD58B8021C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

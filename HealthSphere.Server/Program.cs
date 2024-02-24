@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 // Configure HttpClient for AuthServiceClient
 builder.Services.AddHttpClient("AuthServiceClient", client =>
 {
-    client.BaseAddress = new Uri(Helpers.GetServiceEndpoint(Helpers.Services.Authentication));
+    client.BaseAddress = new Uri(Helpers.GetServiceEndpoint(Helpers.ServiceTypes.Authentication));
     // Configure timeouts, headers, etc. as needed
 });
 
@@ -44,9 +44,9 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
-app.UseRouting();
-
 app.UseMiddleware<AuthenticationMiddleware>();
+
+app.UseRouting();
 
 //app.UseAuthentication();
 app.UseAuthorization();

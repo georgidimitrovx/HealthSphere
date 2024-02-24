@@ -1,0 +1,49 @@
+<div class="gradientContainer">
+</div>
+
+<mat-toolbar color="primary" style="align-items: center; background-color: transparent !important;">
+  <mat-toolbar-row style="max-width: 60rem">
+    <img src="../../assets/HealthSphereLogo.png" width="30" style="margin-right: 10px" />
+    <span>Health Sphere</span>
+    <span style="flex: 1 1 auto"></span>
+    <button mat-button routerLink="/signIn">Sign In</button>
+    &nbsp;
+    <button mat-raised-button routerLink="/signUp">Sign Up</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div style="margin-left: 30px; margin-right: 30px;">
+  <mat-grid-list [cols]="heroCols$ | async"
+                 style="max-width: 50rem;
+                  margin: auto;"
+                 rowHeight="35rem"
+                 gutterSize="10px">
+    <mat-grid-tile style="max-width: 25rem; text-align: left;">
+      <div>
+        <p style="font-weight: bold; color: #3f51b5; font-size: 40px; line-height: 40px">
+          All your health needs in one place
+        </p>
+        <button mat-raised-button color="primary" routerLink="/signUp" style="width: 150px; height: 40px;">
+          Get started
+        </button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="showHeroImage$ | async" style="display: flex; justify-content: flex-end;">
+      <div style="display: flex; justify-content: flex-end; width: 100%">
+        <img src="../../assets/HeroImage.png" style="width: 25rem;" />
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div style="background-color: #3f51b5; padding: 30px;">
+  <h4 style="color: white;">
+    © Health Sphere 2024<br /><br />
+    <a href="https://github.com/georgidimitrovx/HealthSphere" style="color: white;">
+      Source code available on GitHub
+    </a><br />
+    <a href="https://www.linkedin.com/in/georgidimitrovx/" style="color: white;">
+      Georgi Dimitrov on LinkedIn
+    </a>
+  </h4>
+</div>

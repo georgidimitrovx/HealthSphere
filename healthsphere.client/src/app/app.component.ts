@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.signIn();
+    //this.signIn();
+    //this.signUp();
   }
 
   signIn() {
@@ -46,6 +47,29 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         console.error('Sign in failed', error);
+        // Handle sign in error
+      }
+    });
+  }
+
+  signUp() {
+    var signUpUrl = 'https://localhost:7203/api/Gateway/signUp';
+    var userCredentialsDto: UserCredentialsDto = {
+      username: 'georgidimitrovx',
+      email: 'georgidimitrovx@gmail.com',
+      password: 'qwerty',
+      firstName: 'Georgi',
+      lastName: 'Dimitrov',
+      accountType: AccountTypes.Staff
+    }
+
+    this.http.post<any>(signUpUrl, userCredentialsDto).subscribe({
+      next: (response) => {
+        console.log('Sign up successful', response);
+        // Handle successful sign in
+      },
+      error: (error) => {
+        console.error('Sign up failed', error);
         // Handle sign in error
       }
     });

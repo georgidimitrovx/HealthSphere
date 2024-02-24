@@ -1,64 +1,67 @@
 using HealthSphere.SharedKernel.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace HealthSphere.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GatewayController : ControllerBase
     {
-        public GatewayController()
+        private readonly HttpClient _httpClient;
+
+        public GatewayController(IHttpClientFactory httpClientFactory)
         {
+            _httpClient = httpClientFactory.CreateClient();
         }
 
-        //////////////////////////////////////////////////
-        /// AuthenticationService
-
-        [HttpPost]
-        [Route("signIn")]
-        public async Task<IActionResult> SignIn([FromBody] UserCredentialsDto userCredentialsDto)
+        [HttpPost("{*url}")]
+        [HttpGet("{*url}")]
+        public async Task<IActionResult> HandleRequest(string url)
         {
-            var httpClient = new HttpClient();
-            var response = await httpClient.PostAsJsonAsync(
-                Helpers.GetServiceEndpoint(Helpers.Services.Authentication, true) +
-                "signIn", userCredentialsDto);
+            // Identify service endpoint
+            var serviceType = Helpers.GetServiceFromUrl(url);
+            if(serviceType == Helpers.ServiceTypes.Unidentified)
+                return NotFound();
 
-            if (response.IsSuccessStatusCode)
+            var serviceEndpoint = Helpers.GetServiceEndpoint(serviceType, true);
+            var targetUrl = $"{serviceEndpoint}{url}";
+
+            // Identify method
+            var methodType = Request.Method.ToUpper() switch
             {
-                // If auth is successful, return the token or auth result to the client
-                var token = await response.Content.ReadAsStringAsync();
-                return Ok(token);
-            }
-            else
+                "POST" => HttpMethod.Post,
+                "GET" => HttpMethod.Get,
+                // Add other methods as needed
+                _ => throw new InvalidOperationException("HTTP method not supported")
+            };
+
+            // Copy the request headers to the new request
+            var requestMessage = new HttpRequestMessage()
             {
-                // Handle failed authentication
-                return Unauthorized();
+                RequestUri = new Uri(targetUrl),
+                Method = methodType,
+            };
+
+            // Forward the payload if the method supports a body
+            if (methodType == HttpMethod.Post)
+            {
+                var body = await new StreamReader(Request.Body).ReadToEndAsync();
+                requestMessage.Content = new StringContent(body, Encoding.UTF8, "application/json");
             }
+
+            // Forward the request to the target service
+            var response = await _httpClient.SendAsync(requestMessage);
+
+            // Read the response content and return it
+            var content = await response.Content.ReadAsStringAsync();
+
+            return new ContentResult
+            {
+                Content = content,
+                ContentType = response.Content.Headers.ContentType!.ToString(),
+                StatusCode = (int)response.StatusCode
+            };
         }
-
-        [HttpPost]
-        [Route("signUp")]
-        public async Task<IActionResult> SignUp([FromBody] UserCredentialsDto userCredentialsDto)
-        {
-            var httpClient = new HttpClient();
-            var response = await httpClient.PostAsJsonAsync(
-                Helpers.GetServiceEndpoint(Helpers.Services.Authentication, true) +
-                "signUp", userCredentialsDto);
-
-            if (response.IsSuccessStatusCode)
-            {
-                // If auth is successful, return the token or auth result to the client
-                var token = await response.Content.ReadAsStringAsync();
-                return Ok(token);
-            }
-            else
-            {
-                // Handle failed authentication
-                return Unauthorized();
-            }
-        }
-
-        //////////////////////////////////////////////////
-        /// Other service
     }
 }

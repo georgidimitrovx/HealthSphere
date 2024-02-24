@@ -1,4 +1,6 @@
-﻿namespace HealthSphere.Server
+﻿using System.IO;
+
+namespace HealthSphere.Server
 {
     public class AuthenticationMiddleware
     {
@@ -13,6 +15,14 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
+            // Bypass authentication for signup and signin
+            if (context.Request.Path.Equals("/api/Gateway/signIn") ||
+                context.Request.Path.Equals("/api/Gateway/signUp"))
+            {
+                await _next(context);
+                return;
+            }
+
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token == null)
